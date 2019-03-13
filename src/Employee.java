@@ -5,13 +5,21 @@
  * */
 
 public class Employee{
+	//TODO make unique auto generated (vector)
 	private int employeeId;
+	//TODO make unique 6 digits and a letter
 	private String pps;
+	//TODO length 20
 	private String surname;
+	//TODO length 20
 	private String firstName;
-	private char gender;
+
+	private Gender gender;
+	//TODO enum
 	private String department;
+	//TODO positive real number
 	private double salary;
+	//TODO boolean or int (easier)
 	private boolean fullTime;
 
 	// Create Employee with no details
@@ -20,14 +28,14 @@ public class Employee{
 		this.pps = "";
 		this.surname = "";
 		this.firstName = "";
-		this.gender = '\0';
+		this.gender = null;
 		this.department = "";
 		this.salary = 0;
 		this.fullTime = false;
 	}//end Employee with no details
 
 	// Create Employee with details
-	public Employee(int employeeId, String pps, String surname, String firstName, char gender, String department, double salary,
+	public Employee(int employeeId, String pps, String surname, String firstName, Gender gender, String department, double salary,
 			boolean fullTime) {
 		this.employeeId = employeeId;
 		this.pps = pps;
@@ -56,7 +64,7 @@ public class Employee{
 		return this.firstName;
 	}
 
-	public char getGender() {
+	public Gender getGender() {
 		return this.gender;
 	}
 
@@ -89,7 +97,7 @@ public class Employee{
 		this.firstName = firstName;
 	}
 
-	public void setGender(char gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 

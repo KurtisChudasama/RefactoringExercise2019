@@ -14,11 +14,11 @@ public class RandomAccessEmployeeRecord extends Employee
    // Create empty record
    public RandomAccessEmployeeRecord()
    {
-      this(0, "","","",'\0', "", 0.0, false);
+      this(0, "","","",null, "", 0.0, false);
    } // end RandomAccessEmployeeRecord
 
    // Initialize record with details
-   public RandomAccessEmployeeRecord( int employeeId, String pps, String surname, String firstName, char gender, 
+   public RandomAccessEmployeeRecord( int employeeId, String pps, String surname, String firstName, Gender gender,
 		   String department, double salary, boolean fullTime)
    {
       super(employeeId, pps, surname, firstName, gender, department, salary, fullTime);
@@ -31,7 +31,7 @@ public class RandomAccessEmployeeRecord extends Employee
 		setPps(readName(file));
 		setSurname(readName(file));
 		setFirstName(readName(file));
-		setGender(file.readChar());
+		setGender(Gender.valueOf(readName(file)));
 		setDepartment(readName(file));
 		setSalary(file.readDouble());
 		setFullTime(file.readBoolean());
@@ -58,7 +58,7 @@ public class RandomAccessEmployeeRecord extends Employee
       writeName(file, getPps().toUpperCase());
       writeName( file, getSurname().toUpperCase() );
       writeName( file, getFirstName().toUpperCase() );
-      file.writeChar(getGender());
+      writeName(file, String.valueOf(getGender()));
       writeName(file,getDepartment());
       file.writeDouble( getSalary() );
       file.writeBoolean(getFullTime());

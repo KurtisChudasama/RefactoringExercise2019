@@ -24,7 +24,8 @@ import net.miginfocom.swing.MigLayout;
 
 public class AddRecordDialog extends JDialog implements ActionListener {
 	JTextField idField, ppsField, surnameField, firstNameField, salaryField;
-	JComboBox<String> genderCombo, departmentCombo, fullTimeCombo;
+	JComboBox<String> departmentCombo, fullTimeCombo;
+	JComboBox<Gender>genderCombo;
 	JButton save, cancel;
 	EmployeeDetails parent;
 	// constructor for add record dialog
@@ -69,7 +70,7 @@ public class AddRecordDialog extends JDialog implements ActionListener {
 		empDetails.add(firstNameField = new JTextField(20), "growx, pushx, wrap");
 
 		empDetails.add(new JLabel("Gender:"), "growx, pushx");
-		empDetails.add(genderCombo = new JComboBox<String>(this.parent.gender), "growx, pushx, wrap");
+		empDetails.add(genderCombo = new JComboBox<Gender>(this.parent.gender), "growx, pushx, wrap");
 
 		empDetails.add(new JLabel("Department:"), "growx, pushx");
 		empDetails.add(departmentCombo = new JComboBox<String>(this.parent.department), "growx, pushx, wrap");
@@ -114,7 +115,7 @@ public class AddRecordDialog extends JDialog implements ActionListener {
 			fullTime = true;
 		// create new Employee record with details from text fields
 		theEmployee = new Employee(Integer.parseInt(idField.getText()), ppsField.getText().toUpperCase(), surnameField.getText().toUpperCase(),
-				firstNameField.getText().toUpperCase(), genderCombo.getSelectedItem().toString().charAt(0),
+				firstNameField.getText().toUpperCase(), (Gender) genderCombo.getSelectedItem(),
 				departmentCombo.getSelectedItem().toString(), Double.parseDouble(salaryField.getText()), fullTime);
 		this.parent.currentEmployee = theEmployee;
 		this.parent.addRecord(theEmployee);

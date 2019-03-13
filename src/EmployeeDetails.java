@@ -69,7 +69,8 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			searchBySurname, listAll, closeApp;
 	private JButton first, previous, next, last, add, edit, deleteButton, displayAll, searchId, searchSurname,
 			saveChange, cancelChange;
-	private JComboBox<String> genderCombo, departmentCombo, fullTimeCombo;
+	private JComboBox<Gender> genderCombo;
+	private JComboBox<String> departmentCombo, fullTimeCombo;
 	private JTextField idField, ppsField, surnameField, firstNameField, salaryField;
 	private static EmployeeDetails frame = new EmployeeDetails();
 	// font for labels, text fields and combo boxes
@@ -80,7 +81,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	Employee currentEmployee;
 	JTextField searchByIdField, searchBySurnameField;
 	// gender combo box values
-	String[] gender = { "", "M", "F" };
+	Gender[] gender = new Gender[]{Gender.M, Gender.F};
 	// department combo box values
 	String[] department = { "", "Administration", "Production", "Transport", "Management" };
 	// full time combo box values
@@ -243,9 +244,9 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 		empDetails.add(new JLabel("First Name:"), "growx, pushx");
 		empDetails.add(firstNameField = new JTextField(20), "growx, pushx, wrap");
-
+	//TODO enum new JComboBox(Mood.values());
 		empDetails.add(new JLabel("Gender:"), "growx, pushx");
-		empDetails.add(genderCombo = new JComboBox<String>(gender), "growx, pushx, wrap");
+		empDetails.add(genderCombo = new JComboBox(Gender.values()), "growx, pushx, wrap");
 
 		empDetails.add(new JLabel("Department:"), "growx, pushx");
 		empDetails.add(departmentCombo = new JComboBox<String>(department), "growx, pushx, wrap");
@@ -310,7 +311,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		} else {
 			// find corresponding gender combo box value to current employee
 			while (!found && countGender < gender.length - 1) {
-				if (Character.toString(thisEmployee.getGender()).equalsIgnoreCase(gender[countGender]))
+				if (thisEmployee.getGender() == gender[countGender])
 					found = true;
 				else
 					countGender++;
@@ -541,7 +542,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 		theEmployee = new Employee(Integer.parseInt(idField.getText()), ppsField.getText().toUpperCase(),
 				surnameField.getText().toUpperCase(), firstNameField.getText().toUpperCase(),
-				genderCombo.getSelectedItem().toString().charAt(0), departmentCombo.getSelectedItem().toString(),
+				(Gender) genderCombo.getSelectedItem(), departmentCombo.getSelectedItem().toString(),
 				Double.parseDouble(salaryField.getText()), fullTime);
 
 		return theEmployee;
@@ -595,7 +596,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			empDetails.addElement(currentEmployee.getPps());
 			empDetails.addElement(currentEmployee.getSurname());
 			empDetails.addElement(currentEmployee.getFirstName());
-			empDetails.addElement(new Character(currentEmployee.getGender()));
+			empDetails.addElement(currentEmployee.getGender());
 			empDetails.addElement(currentEmployee.getDepartment());
 			empDetails.addElement(new Double(currentEmployee.getSalary()));
 			empDetails.addElement(new Boolean(currentEmployee.getFullTime()));
