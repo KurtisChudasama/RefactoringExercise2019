@@ -22,6 +22,7 @@ public class Employee{
 	//TODO boolean or int (easier)
 	private boolean fullTime;
 
+	//TODO blank constructor
 	// Create Employee with no details
 	public Employee() {
 		this.employeeId = 0;

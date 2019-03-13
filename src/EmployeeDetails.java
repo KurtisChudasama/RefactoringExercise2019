@@ -81,7 +81,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	Employee currentEmployee;
 	JTextField searchByIdField, searchBySurnameField;
 	// gender combo box values
-	Gender[] gender = new Gender[]{Gender.M, Gender.F};
+	Gender[] gender = new Gender[]{Gender.BLANK, Gender.M, Gender.F};
 	// department combo box values
 	String[] department = { "", "Administration", "Production", "Transport", "Management" };
 	// full time combo box values
@@ -246,7 +246,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		empDetails.add(firstNameField = new JTextField(20), "growx, pushx, wrap");
 	//TODO enum new JComboBox(Mood.values());
 		empDetails.add(new JLabel("Gender:"), "growx, pushx");
-		empDetails.add(genderCombo = new JComboBox(Gender.values()), "growx, pushx, wrap");
+		empDetails.add(genderCombo = new JComboBox(gender), "growx, pushx, wrap");
 
 		empDetails.add(new JLabel("Department:"), "growx, pushx");
 		empDetails.add(departmentCombo = new JComboBox<String>(department), "growx, pushx, wrap");
@@ -255,7 +255,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		empDetails.add(salaryField = new JTextField(20), "growx, pushx, wrap");
 
 		empDetails.add(new JLabel("Full Time:"), "growx, pushx");
-		empDetails.add(fullTimeCombo = new JComboBox<String>(fullTime), "growx, pushx, wrap");
+		empDetails.add(fullTimeCombo = new JComboBox<String>(fullTime), migLayout3() );
 
 		buttonPanel.add(saveChange = new JButton("Save"));
 		saveChange.addActionListener(this);
@@ -295,6 +295,11 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		} // end for
 		return empDetails;
 	}// end detailsPanel
+
+	//TODO add miglayout 2
+	public String migLayout3(){
+		return "growx, pushx, wrap";
+	}
 
 	// display current Employee details
 	public void displayRecords(Employee thisEmployee) {
@@ -761,7 +766,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 		return valid;
 	}
-
+//TODO doing same as above
 	// set text field background colour to white
 	private void setToWhite() {
 		ppsField.setBackground(UIManager.getColor("TextField.background"));

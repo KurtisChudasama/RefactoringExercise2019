@@ -10,7 +10,7 @@ import java.io.IOException;
 public class RandomAccessEmployeeRecord extends Employee
 {  
     public static final int SIZE = 175; // Size of each RandomAccessEmployeeRecord object
-
+//TODO blank constructor
    // Create empty record
    public RandomAccessEmployeeRecord()
    {
@@ -46,8 +46,7 @@ public class RandomAccessEmployeeRecord extends Employee
       {
          temp = file.readChar();
          name[ count ] = temp;
-      } // end for     
-      
+      } // end for
       return new String( name ).replace( '\0', ' ' );
    } // end readName
 
