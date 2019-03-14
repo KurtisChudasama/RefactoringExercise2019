@@ -27,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 import net.miginfocom.swing.MigLayout;
 
 public class EmployeeSummaryDialog extends JDialog implements ActionListener {
-	// vector with all Employees details
+
 	Vector<Object> allEmployees;
 	JButton back;
 	
@@ -57,18 +57,18 @@ public class EmployeeSummaryDialog extends JDialog implements ActionListener {
 		// column left alignment 
 		DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
 		Vector<String> header = new Vector<String>();
-		// header names
+
 		String[] headerName = { DisplayValues.id_header, DisplayValues.pps_header, DisplayValues.surname_header, DisplayValues.firstname_header, DisplayValues.gender_header,
 				DisplayValues.department_header, DisplayValues.salary_header, DisplayValues.fulltime_header };
-		// column widths
+
 		int[] colWidth = { 15, 100, 120, 120, 50, 120, 80, 80 };
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
 		leftRenderer.setHorizontalAlignment(JLabel.LEFT);
 		// add headers
 		for (int i = 0; i < headerName.length; i++) {
 			header.addElement(headerName[i]);
-		}// end for
-		// construnct table and choose table model for each column
+		}
+		// construct table and choose table model for each column
 		tableModel = new DefaultTableModel(this.allEmployees, header) {
 			public Class getColumnClass(int c) {
 				switch (c) {
@@ -82,15 +82,15 @@ public class EmployeeSummaryDialog extends JDialog implements ActionListener {
 					return Boolean.class;
 				default:
 					return String.class;
-				}// end switch
-			}// end getColumnClass
+				}
+			}
 		};
 
 		employeeTable = new JTable(tableModel);
 		// add header names to table
 		for (int i = 0; i < employeeTable.getColumnCount(); i++) {
 			employeeTable.getColumn(headerName[i]).setMinWidth(colWidth[i]);
-		}// end for
+		}
 		// set alignments
 		employeeTable.getColumnModel().getColumn(0).setCellRenderer(leftRenderer);
 		employeeTable.getColumnModel().getColumn(4).setCellRenderer(centerRenderer);
@@ -110,7 +110,7 @@ public class EmployeeSummaryDialog extends JDialog implements ActionListener {
 		scrollPane.setBorder(BorderFactory.createTitledBorder(DisplayValues.employee_details));
 		
 		return summaryDialog;
-	}// end summaryPane
+	}
 
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource() == back){
@@ -129,10 +129,10 @@ public class EmployeeSummaryDialog extends JDialog implements ActionListener {
 			Component c = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
 			 JLabel label = (JLabel) c;
 			 label.setHorizontalAlignment(JLabel.RIGHT);
-			 // format salary column
+
 			value = format.format((Number) value);
 
 			return super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-		}// end getTableCellRendererComponent
-	}// DefaultTableCellRenderer
-}// end class EmployeeSummaryDialog
+		}
+	}
+}

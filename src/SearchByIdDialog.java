@@ -25,7 +25,7 @@ public class SearchByIdDialog extends JDialog implements ActionListener {
 	EmployeeDetails parent;
 	JButton search, cancel;
 	JTextField searchField;
-	// constructor for SearchByIdDialog 
+
 	public SearchByIdDialog(EmployeeDetails parent) {
 		setTitle(DisplayValues.surname_search);
 		setModal(true);
@@ -40,7 +40,7 @@ public class SearchByIdDialog extends JDialog implements ActionListener {
 		setSize(500, 190);
 		setLocation(350, 250);
 		setVisible(true);
-	}// end SearchByIdDialog
+	}
 	
 	// initialize search container
 	public Container searchPane() {
@@ -69,28 +69,28 @@ public class SearchByIdDialog extends JDialog implements ActionListener {
 		searchPanel.add(buttonPanel);
 
 		return searchPanel;
-	}// end searchPane
+	}
 
 	// action listener for save and cancel button
 	public void actionPerformed(ActionEvent e) {
-		// if option search, search for Employee
+
 		if (e.getSource() == search) {
 			// try get correct valus from text field
 			try {
 				Double.parseDouble(searchField.getText());
 				this.parent.searchByIdField.setText(searchField.getText());
-				// search Employee by ID
+
 				this.parent.searchEmployeeById();
-				dispose();// dispose dialog
-			}// end try
+				dispose();
+			}
 			catch (NumberFormatException num) {
 				// display message and set colour to text field if entry is wrong
 				searchField.setBackground(Colour.red);
 				JOptionPane.showMessageDialog(null, DisplayValues.id_format_error);
-			}// end catch
-		}// end if
-		// else dispose dialog
+			}
+		}
+
 		else if (e.getSource() == cancel)
 			dispose();
-	}// end actionPerformed
-}// end class searchByIdDialog
+	}
+}
