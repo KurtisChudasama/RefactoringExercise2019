@@ -28,6 +28,6 @@ class JTextFieldLimit extends PlainDocument {
     if ((getLength() + str.length()) <= limit) 
       super.insertString(offset, str, attr);
     else
-    	JOptionPane.showMessageDialog(null, "For input " + limit + " characters maximum!");
+    	JOptionPane.showMessageDialog(null, DisplayValues.for_input + limit + DisplayValues.max_chars);
   }// end insertString
 }// end class JTextFieldLimits

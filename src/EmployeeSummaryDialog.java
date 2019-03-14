@@ -32,7 +32,7 @@ public class EmployeeSummaryDialog extends JDialog implements ActionListener {
 	JButton back;
 	
 	public EmployeeSummaryDialog(Vector<Object> allEmployees) {
-		setTitle("Employee Summary");
+		setTitle(DisplayValues.employee_summary);
 		setModal(true);
 		this.allEmployees = allEmployees;
 
@@ -58,8 +58,8 @@ public class EmployeeSummaryDialog extends JDialog implements ActionListener {
 		DefaultTableCellRenderer leftRenderer = new DefaultTableCellRenderer();
 		Vector<String> header = new Vector<String>();
 		// header names
-		String[] headerName = { "ID", "PPS Number", "Surname", "First Name", "Gender", "Department", "Salary",
-				"Full Time" };
+		String[] headerName = { DisplayValues.id_header, DisplayValues.pps_header, DisplayValues.surname_header, DisplayValues.firstname_header, DisplayValues.gender_header,
+				DisplayValues.department_header, DisplayValues.salary_header, DisplayValues.fulltime_header };
 		// column widths
 		int[] colWidth = { 15, 100, 120, 120, 50, 120, 80, 80 };
 		centerRenderer.setHorizontalAlignment(JLabel.CENTER);
@@ -101,13 +101,13 @@ public class EmployeeSummaryDialog extends JDialog implements ActionListener {
 		employeeTable.setAutoCreateRowSorter(true);
 		JScrollPane scrollPane = new JScrollPane(employeeTable);
 
-		buttonPanel.add(back = new JButton("Back"));
+		buttonPanel.add(back = new JButton(DisplayValues.back));
 		back.addActionListener(this);
-		back.setToolTipText("Return to main screen");
+		back.setToolTipText(DisplayValues.return_main);
 		
 		summaryDialog.add(buttonPanel,LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
 		summaryDialog.add(scrollPane,LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
-		scrollPane.setBorder(BorderFactory.createTitledBorder("Employee Details"));
+		scrollPane.setBorder(BorderFactory.createTitledBorder(DisplayValues.employee_details));
 		
 		return summaryDialog;
 	}// end summaryPane

@@ -29,7 +29,7 @@ public class AddRecordDialog extends JDialog implements ActionListener {
 	EmployeeDetails parent;
 	// constructor for add record dialog
 	public AddRecordDialog(EmployeeDetails parent) {
-		setTitle("Add Record");
+		setTitle(DisplayValues.add_record);
 		setModal(true);
 		this.parent = parent;
 		this.parent.setEnabled(false);
@@ -52,38 +52,38 @@ public class AddRecordDialog extends JDialog implements ActionListener {
 		buttonPanel = new JPanel();
 		JTextField field;
 
-		empDetails.setBorder(BorderFactory.createTitledBorder("Employee Details"));
+		empDetails.setBorder(BorderFactory.createTitledBorder(DisplayValues.employee_details));
 
-		empDetails.add(new JLabel("ID:"), LayoutOptions.grow + ", " + LayoutOptions.push);
+		empDetails.add(new JLabel(DisplayValues.id), LayoutOptions.grow + ", " + LayoutOptions.push);
 		empDetails.add(idField = new JTextField(20), LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
 		idField.setEditable(false);
 		
 
-		empDetails.add(new JLabel("PPS Number:"), LayoutOptions.grow + ", " + LayoutOptions.push);
+		empDetails.add(new JLabel(DisplayValues.pps_number), LayoutOptions.grow + ", " + LayoutOptions.push);
 		empDetails.add(ppsField = new JTextField(20), LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
 
-		empDetails.add(new JLabel("Surname:"), LayoutOptions.grow + ", " + LayoutOptions.push);
+		empDetails.add(new JLabel(DisplayValues.surname), LayoutOptions.grow + ", " + LayoutOptions.push);
 		empDetails.add(surnameField = new JTextField(20), LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
 
-		empDetails.add(new JLabel("First Name:"), LayoutOptions.grow + ", " + LayoutOptions.push);
+		empDetails.add(new JLabel(DisplayValues.first_name), LayoutOptions.grow + ", " + LayoutOptions.push);
 		empDetails.add(firstNameField = new JTextField(20), LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
 
-		empDetails.add(new JLabel("Gender:"), LayoutOptions.grow + ", " + LayoutOptions.push);
+		empDetails.add(new JLabel(DisplayValues.gender), LayoutOptions.grow + ", " + LayoutOptions.push);
 		empDetails.add(genderCombo = new JComboBox<String>(this.parent.gender), LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
 
-		empDetails.add(new JLabel("Department:"), LayoutOptions.grow + ", " + LayoutOptions.push);
+		empDetails.add(new JLabel(DisplayValues.department), LayoutOptions.grow + ", " + LayoutOptions.push);
 		empDetails.add(departmentCombo = new JComboBox<String>(this.parent.department), LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
 
-		empDetails.add(new JLabel("Salary:"), LayoutOptions.grow + ", " + LayoutOptions.push);
+		empDetails.add(new JLabel(DisplayValues.salary), LayoutOptions.grow + ", " + LayoutOptions.push);
 		empDetails.add(salaryField = new JTextField(20), LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
 
-		empDetails.add(new JLabel("Full Time:"), LayoutOptions.grow + ", " + LayoutOptions.push);
+		empDetails.add(new JLabel(DisplayValues.full_time), LayoutOptions.grow + ", " + LayoutOptions.push);
 		empDetails.add(fullTimeCombo = new JComboBox<String>(this.parent.fullTime), LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
 
-		buttonPanel.add(save = new JButton("Save"));
+		buttonPanel.add(save = new JButton(DisplayValues.save));
 		save.addActionListener(this);
 		save.requestFocus();
-		buttonPanel.add(cancel = new JButton("Cancel"));
+		buttonPanel.add(cancel = new JButton(DisplayValues.cancel));
 		cancel.addActionListener(this);
 
 		empDetails.add(buttonPanel, LayoutOptions.span + ", " + LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
@@ -110,7 +110,7 @@ public class AddRecordDialog extends JDialog implements ActionListener {
 		boolean fullTime = false;
 		Employee theEmployee;
 
-		if (((String) fullTimeCombo.getSelectedItem()).equalsIgnoreCase("Yes"))
+		if (((String) fullTimeCombo.getSelectedItem()).equalsIgnoreCase(DisplayValues.yes))
 			fullTime = true;
 		// create new Employee record with details from text fields
 		theEmployee = new Employee(Integer.parseInt(idField.getText()), ppsField.getText().toUpperCase(), surnameField.getText().toUpperCase(),
@@ -191,7 +191,7 @@ public class AddRecordDialog extends JDialog implements ActionListener {
 			}// end if
 			// else display message and set text fields to white colour
 			else {
-				JOptionPane.showMessageDialog(null, "Wrong values or format! Please check!");
+				JOptionPane.showMessageDialog(null, DisplayValues.value_format_error);
 				setToWhite();
 			}// end else
 		}// end if

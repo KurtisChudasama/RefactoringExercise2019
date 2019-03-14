@@ -25,7 +25,7 @@ public class RandomFile {
 
 		} // end try
 		catch (IOException ioException) {
-			JOptionPane.showMessageDialog(null, "Error processing file!");
+			JOptionPane.showMessageDialog(null, DisplayValues.process_file_error);
 			System.exit(1);
 		} // end catch
 
@@ -35,7 +35,7 @@ public class RandomFile {
 					file.close(); // close file
 			} // end try
 			catch (IOException ioException) {
-				JOptionPane.showMessageDialog(null, "Error closing file!");
+				JOptionPane.showMessageDialog(null, DisplayValues.close_file_error);
 				System.exit(1);
 			} // end catch
 		} // end finally
@@ -48,7 +48,7 @@ public class RandomFile {
 			output = new RandomAccessFile(fileName, "rw");
 		} // end try
 		catch (IOException ioException) {
-			JOptionPane.showMessageDialog(null, "File does not exist!");
+			JOptionPane.showMessageDialog(null, DisplayValues.no_exist_file_error);
 		} // end catch
 	} // end method openFile
 
@@ -60,7 +60,7 @@ public class RandomFile {
 				output.close();
 		} // end try
 		catch (IOException ioException) {
-			JOptionPane.showMessageDialog(null, "Error closing file!");
+			JOptionPane.showMessageDialog(null, DisplayValues.close_file_error);
 			System.exit(1);
 		} // end catch
 	} // end closeFile
@@ -84,7 +84,7 @@ public class RandomFile {
 			currentRecordStart = output.length();
 		} // end try
 		catch (IOException ioException) {
-			JOptionPane.showMessageDialog(null, "Error writing to file!");
+			JOptionPane.showMessageDialog(null, DisplayValues.write_file_error);
 		} // end catch
 
 		return currentRecordStart - RandomAccessEmployeeRecord.SIZE;// Return
@@ -111,7 +111,7 @@ public class RandomFile {
 			record.write(output);// Write object to file
 		} // end try
 		catch (IOException ioException) {
-			JOptionPane.showMessageDialog(null, "Error writing to file!");
+			JOptionPane.showMessageDialog(null, DisplayValues.write_file_error);
 		} // end catch
 	}// end changeRecors
 
@@ -130,7 +130,7 @@ public class RandomFile {
 			record.write(output);// Replace existing object with empty object
 		} // end try
 		catch (IOException ioException) {
-			JOptionPane.showMessageDialog(null, "Error writing to file!");
+			JOptionPane.showMessageDialog(null, DisplayValues.write_file_error);
 		} // end catch
 	}// end deleteRecords
 
@@ -141,7 +141,7 @@ public class RandomFile {
 			input = new RandomAccessFile(fileName, "r");
 		} // end try
 		catch (IOException ioException) {
-			JOptionPane.showMessageDialog(null, "File is not suported!");
+			JOptionPane.showMessageDialog(null, DisplayValues.not_supported_file_error);
 		} // end catch
 	} // end method openFile
 
@@ -153,7 +153,7 @@ public class RandomFile {
 				input.close();
 		} // end try
 		catch (IOException ioException) {
-			JOptionPane.showMessageDialog(null, "Error closing file!");
+			JOptionPane.showMessageDialog(null, DisplayValues.close_file_error);
 			System.exit(1);
 		} // end catch
 	} // end method closeFile
@@ -256,7 +256,7 @@ public class RandomFile {
 					// If PPS Number already exist in other record display message and stop search
 					if (record.getPps().trim().equalsIgnoreCase(pps)) {
 						ppsExist = true;
-						JOptionPane.showMessageDialog(null, "PPS number already exist!");
+						JOptionPane.showMessageDialog(null, DisplayValues.existing_pps_error);
 					}// end if
 				}// end if
 				currentByte = currentByte + RandomAccessEmployeeRecord.SIZE;

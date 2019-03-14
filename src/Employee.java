@@ -116,9 +116,9 @@ public class Employee{
 	public String toString() {
 		String bool = "";
 		if (fullTime)
-			bool = "Yes";
+			bool = DisplayValues.yes;
 		else
-			bool = "No";
+			bool = DisplayValues.no;
 
 		return "Employee ID: " + this.employeeId + "\nPPS Number: " + this.pps + "\nSurname: " + this.surname
 				+ "\nFirst Name: " + this.firstName + "\nGender: " + this.gender + "\nDepartment: " + this.department + "\nSalary: " + this.salary

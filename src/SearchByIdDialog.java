@@ -27,7 +27,7 @@ public class SearchByIdDialog extends JDialog implements ActionListener {
 	JTextField searchField;
 	// constructor for SearchByIdDialog 
 	public SearchByIdDialog(EmployeeDetails parent) {
-		setTitle("Search by Surname");
+		setTitle(DisplayValues.surname_search);
 		setModal(true);
 		this.parent = parent;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -49,20 +49,20 @@ public class SearchByIdDialog extends JDialog implements ActionListener {
 		JPanel buttonPanel = new JPanel();
 		JLabel searchLabel;
 
-		searchPanel.add(new JLabel("Search by ID"));
+		searchPanel.add(new JLabel(DisplayValues.id_search));
 
 		textPanel.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.LOWERED));
-		textPanel.add(searchLabel = new JLabel("Enter ID:"));
+		textPanel.add(searchLabel = new JLabel(DisplayValues.enter_id));
 		searchLabel.setFont(this.parent.font1);
 		textPanel.add(searchField = new JTextField(20));
 		searchField.setFont(this.parent.font1);
 		searchField.setDocument(new JTextFieldLimit(20));
 		
-		buttonPanel.add(search = new JButton("Search"));
+		buttonPanel.add(search = new JButton(DisplayValues.search));
 		search.addActionListener(this);
 		search.requestFocus();
 		
-		buttonPanel.add(cancel = new JButton("Cancel"));
+		buttonPanel.add(cancel = new JButton(DisplayValues.cancel));
 		cancel.addActionListener(this);
 
 		searchPanel.add(textPanel);
@@ -86,7 +86,7 @@ public class SearchByIdDialog extends JDialog implements ActionListener {
 			catch (NumberFormatException num) {
 				// display message and set colour to text field if entry is wrong
 				searchField.setBackground(Colour.red);
-				JOptionPane.showMessageDialog(null, "Wrong ID format!");
+				JOptionPane.showMessageDialog(null, DisplayValues.id_format_error);
 			}// end catch
 		}// end if
 		// else dispose dialog
