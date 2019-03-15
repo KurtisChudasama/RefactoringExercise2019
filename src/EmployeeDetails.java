@@ -57,10 +57,19 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	// hold object start position in file
 	private long currentByteStart = 0;
 	private RandomFile application = new RandomFile();
+
+	public RandomFile getApplication() {
+		return application;
+	}
+
 	// display files in File Chooser only with extension .dat
 	private FileNameExtensionFilter datfilter = new FileNameExtensionFilter("dat files (*.dat)", "dat");
 
 	private File file;
+
+	public File getFile() {
+		return file;
+	}
 	//TODO booleans below need name changes
 	// holds true or false if any changes are made for text fields
 	private boolean change = false;
@@ -87,6 +96,8 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	String[] department = { DisplayValues.empty, DisplayValues.administration, DisplayValues.production, DisplayValues.transport, DisplayValues.management };
 
 	String[] fullTime = { DisplayValues.empty, DisplayValues.yes, DisplayValues.no };
+
+	Validation validation = new Validation();
 
 
 	private JMenuBar menuBar() {
@@ -645,31 +656,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		return someoneToDisplay;
 	}
 
-	// check for correct PPS format and look if PPS already in use
-	public boolean correctPps(String pps, long currentByte) {
-		boolean ppsExist = false;
-		// check for correct PPS format based on assignment description
-		if (pps.length() == 8 || pps.length() == 9) {
-			if (Character.isDigit(pps.charAt(0)) && Character.isDigit(pps.charAt(1))
-					&& Character.isDigit(pps.charAt(2))	&& Character.isDigit(pps.charAt(3)) 
-					&& Character.isDigit(pps.charAt(4))	&& Character.isDigit(pps.charAt(5)) 
-					&& Character.isDigit(pps.charAt(6))	&& Character.isLetter(pps.charAt(7))
-					&& (pps.length() == 8 || Character.isLetter(pps.charAt(8)))) {
-
-				application.openReadFile(file.getAbsolutePath());
-				// look in file is PPS already in use
-				ppsExist = application.isPpsExist(pps, currentByte);
-				application.closeReadFile();
-			}
-			else
-				ppsExist = true;
-		}
-		else
-			ppsExist = true;
-
-		return ppsExist;
-	}
-
 	// check if file name has extension .dat
 	private boolean checkFileName(File fileName) {
 		boolean checkFile = false;
@@ -701,50 +687,9 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 	// check for input in text fields
 	private boolean checkInput() {
-		boolean valid = true;
-		// if any of inputs are in wrong format, colour text field and display message
-		if (ppsField.isEditable() && ppsField.getText().trim().isEmpty()) {
-			ppsField.setBackground(Colour.red);
-			valid = false;
-		}
-		if (ppsField.isEditable() && correctPps(ppsField.getText().trim(), currentByteStart)) {
-			ppsField.setBackground(Colour.red);
-			valid = false;
-		}
-		if (surnameField.isEditable() && surnameField.getText().trim().isEmpty()) {
-			surnameField.setBackground(Colour.red);
-			valid = false;
-		}
-		if (firstNameField.isEditable() && firstNameField.getText().trim().isEmpty()) {
-			firstNameField.setBackground(Colour.red);
-			valid = false;
-		}
-		if (genderCombo.getSelectedIndex() == 0 && genderCombo.isEnabled()) {
-			genderCombo.setBackground(Colour.red);
-			valid = false;
-		}
-		if (departmentCombo.getSelectedIndex() == 0 && departmentCombo.isEnabled()) {
-			departmentCombo.setBackground(Colour.red);
-			valid = false;
-		}
-		try {
-			Double.parseDouble(salaryField.getText());
 
-			if (Double.parseDouble(salaryField.getText()) < 0) {
-				salaryField.setBackground(Colour.red);
-				valid = false;
-			}
-		}
-		catch (NumberFormatException num) {
-			if (salaryField.isEditable()) {
-				salaryField.setBackground(Colour.red);
-				valid = false;
-			}
-		}
-		if (fullTimeCombo.getSelectedIndex() == 0 && fullTimeCombo.isEnabled()) {
-			fullTimeCombo.setBackground(Colour.red);
-			valid = false;
-		}
+		boolean valid = validation.validateEmpDetails(ppsField, surnameField, firstNameField, genderCombo, departmentCombo, salaryField, fullTimeCombo,
+				currentByteStart, application, file);
 
 		if (!valid)
 			JOptionPane.showMessageDialog(null, DisplayValues.value_format_error);
