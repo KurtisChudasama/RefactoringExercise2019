@@ -166,9 +166,9 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		searchPanel.add(searchByIdField = new JTextField(20), "width 200:200:200, " + LayoutOptions.grow + ", " + LayoutOptions.push);
 		searchByIdField.addActionListener(this);
 		searchByIdField.setDocument(new JTextFieldLimit(20));
-		//TODO add image class for image strings
+
 		searchPanel.add(searchId = new JButton(new ImageIcon(
-				new ImageIcon("imgres.png").getImage().getScaledInstance(35, 20, java.awt.Image.SCALE_SMOOTH))),
+				new ImageIcon("static/search_icon.png").getImage().getScaledInstance(35, 20, java.awt.Image.SCALE_SMOOTH))),
 				"width 35:35:35, height 20:20:20, " + LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
 		searchId.addActionListener(this);
 		searchId.setToolTipText(DisplayValues.employee_by_id_search);
@@ -178,7 +178,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		searchBySurnameField.addActionListener(this);
 		searchBySurnameField.setDocument(new JTextFieldLimit(20));
 		searchPanel.add(
-				searchSurname = new JButton(new ImageIcon(new ImageIcon("imgres.png").getImage()
+				searchSurname = new JButton(new ImageIcon(new ImageIcon("static/search_icon.png").getImage()
 						.getScaledInstance(35, 20, java.awt.Image.SCALE_SMOOTH))),
 				"width 35:35:35, height 20:20:20, " + LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
 		searchSurname.addActionListener(this);
@@ -191,28 +191,27 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	private JPanel navigPanel() {
 		JPanel navigPanel = new JPanel();
 
-		//TODO images here also
 		navigPanel.setBorder(BorderFactory.createTitledBorder(DisplayValues.navigate));
 		navigPanel.add(first = new JButton(new ImageIcon(
-				new ImageIcon("first.png").getImage().getScaledInstance(17, 17, java.awt.Image.SCALE_SMOOTH))));
+				new ImageIcon("static/first.png").getImage().getScaledInstance(17, 17, java.awt.Image.SCALE_SMOOTH))));
 		first.setPreferredSize(new Dimension(17, 17));
 		first.addActionListener(this);
 		first.setToolTipText(DisplayValues.display_first);
 
-		navigPanel.add(previous = new JButton(new ImageIcon(new ImageIcon("previous.png").getImage()
+		navigPanel.add(previous = new JButton(new ImageIcon(new ImageIcon("static/prev.png").getImage()
 				.getScaledInstance(17, 17, java.awt.Image.SCALE_SMOOTH))));
 		previous.setPreferredSize(new Dimension(17, 17));
 		previous.addActionListener(this);
 		previous.setToolTipText(DisplayValues.display_next);
 
 		navigPanel.add(next = new JButton(new ImageIcon(
-				new ImageIcon("next.png").getImage().getScaledInstance(17, 17, java.awt.Image.SCALE_SMOOTH))));
+				new ImageIcon("static/next.png").getImage().getScaledInstance(17, 17, java.awt.Image.SCALE_SMOOTH))));
 		next.setPreferredSize(new Dimension(17, 17));
 		next.addActionListener(this);
 		next.setToolTipText(DisplayValues.display_previous);
 
 		navigPanel.add(last = new JButton(new ImageIcon(
-				new ImageIcon("last.png").getImage().getScaledInstance(17, 17, java.awt.Image.SCALE_SMOOTH))));
+				new ImageIcon("static/last.png").getImage().getScaledInstance(17, 17, java.awt.Image.SCALE_SMOOTH))));
 		last.setPreferredSize(new Dimension(17, 17));
 		last.addActionListener(this);
 		last.setToolTipText(DisplayValues.display_last);
