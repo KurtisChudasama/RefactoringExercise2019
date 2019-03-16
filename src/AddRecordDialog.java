@@ -89,7 +89,7 @@ public class AddRecordDialog extends JDialog implements ActionListener {
 		empDetails.add(buttonPanel, LayoutOptions.span + ", " + LayoutOptions.grow + ", " + LayoutOptions.push + ", " + LayoutOptions.wrap);
 		// loop through all panel components and add fonts and listeners
 		for (int i = 0; i < empDetails.getComponentCount(); i++) {
-			empDetails.getComponent(i).setFont(this.parent.font1);
+			empDetails.getComponent(i).setFont(Fonts.font1);
 			if (empDetails.getComponent(i) instanceof JComboBox) {
 				empDetails.getComponent(i).setBackground(Colour.white);
 			}

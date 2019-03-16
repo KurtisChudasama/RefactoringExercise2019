@@ -82,9 +82,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	private JComboBox<String> genderCombo, departmentCombo, fullTimeCombo;
 	private JTextField idField, ppsField, surnameField, firstNameField, salaryField;
 	private static EmployeeDetails frame = new EmployeeDetails();
-	// font for labels, text fields and combo boxes
-	//TODO make font class
-	Font font1 = new Font("SansSerif", Font.BOLD, 16);
 
 	String generatedFileName;
 
@@ -284,7 +281,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 		// loop through panel components and add listeners and format
 		for (int i = 0; i < empDetails.getComponentCount(); i++) {
-			empDetails.getComponent(i).setFont(font1);
+			empDetails.getComponent(i).setFont(Fonts.font1);
 			if (empDetails.getComponent(i) instanceof JTextField) {
 				field = (JTextField) empDetails.getComponent(i);
 				field.setEditable(false);
