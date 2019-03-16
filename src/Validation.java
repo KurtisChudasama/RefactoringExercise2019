@@ -12,7 +12,7 @@ public class Validation {
             ppsField.setBackground(Colour.red);
             valid = false;
         }
-        if (ppsField.isEditable() && correctPps(ppsField.getText().trim(), currentByteStart, application, file)) {
+        if (ppsField.isEditable()  && correctPps(ppsField.getText().trim(), currentByteStart, application, file)) {
             ppsField.setBackground(Colour.red);
             valid = false;
         }
@@ -33,7 +33,6 @@ public class Validation {
             valid = false;
         }
         try {
-            Double.parseDouble(salaryField.getText());
 
             if (Double.parseDouble(salaryField.getText()) < 0) {
                 salaryField.setBackground(Colour.red);

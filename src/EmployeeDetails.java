@@ -99,6 +99,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 	Validation validation = new Validation();
 
+	private String type;
 
 	private JMenuBar menuBar() {
 		JMenuBar menuBar = new JMenuBar();
@@ -359,8 +360,12 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			new EmployeeSummaryDialog(getAllEmloyees());
 	}
 
+	private void displaySearchByDialog(String type) {
+		if (isSomeoneToDisplay())
+			new SearchByDialog(EmployeeDetails.this, type);
+	}
 
-	private void displaySearchByIdDialog() {
+	/*private void displaySearchByIdDialog() {
 		if (isSomeoneToDisplay())
 			new SearchByIdDialog(EmployeeDetails.this);
 	}
@@ -369,7 +374,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	private void displaySearchBySurnameDialog() {
 		if (isSomeoneToDisplay())
 			new SearchBySurnameDialog(EmployeeDetails.this);
-	}
+	}*/
 
 	// find byte start in file for first active record
 	private void firstRecord() {
@@ -934,11 +939,15 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 				saveFileAs();
 			change = false;
 		} else if (e.getSource() == searchById) {
-			if (checkInput() && !checkForChanges())
-				displaySearchByIdDialog();
+			if (checkInput() && !checkForChanges()) {
+				type = "ID";
+				displaySearchByDialog(type);
+			}
 		} else if (e.getSource() == searchBySurname) {
-			if (checkInput() && !checkForChanges())
-				displaySearchBySurnameDialog();
+			if (checkInput() && !checkForChanges()) {
+				type = "Surname";
+				displaySearchByDialog(type);
+			}
 		} else if (e.getSource() == searchId || e.getSource() == searchByIdField)
 			searchEmployeeById();
 		else if (e.getSource() == searchSurname || e.getSource() == searchBySurnameField)
@@ -983,7 +992,8 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 				deleteRecord();
 		} else if (e.getSource() == searchBySurname) {
 			if (checkInput() && !checkForChanges())
-				new SearchBySurnameDialog(EmployeeDetails.this);
+				type = "Surname";
+				new SearchByDialog(EmployeeDetails.this, type);
 		}
 	}
 

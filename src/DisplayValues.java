@@ -82,4 +82,7 @@ public class DisplayValues {
     static String no_employees_registered = "No Employees registered!";
     static String save_changes_question = "Do you want to save changes?";
     static String save_changes_to_employee_question = "Do you want to save changes to current Employee?";
+    static String search_by = "Search by ";
+    static String enter = "Enter ";
+    static String colon = ": ";
 }
