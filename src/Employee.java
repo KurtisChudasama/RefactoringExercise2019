@@ -15,17 +15,8 @@ public class Employee{
 	private double salary;
 	private boolean fullTime;
 
-	//TODO blank constructor
-
 	public Employee() {
-		this.employeeId = 0;
-		this.pps = "";
-		this.surname = "";
-		this.firstName = "";
-		this.gender = '\0';
-		this.department = "";
-		this.salary = 0;
-		this.fullTime = false;
+
 	}
 
 
