@@ -5,19 +5,14 @@
  * */
 
 public class Employee{
-	//TODO make unique auto generated (vector)
+
 	private int employeeId;
-	//TODO make unique 6 digits and a letter
 	private String pps;
-	//TODO length 20
 	private String surname;
-	//TODO length 20
 	private String firstName;
 	private char gender;
 	private String department;
-	//TODO positive real number
 	private double salary;
-	//TODO boolean or int (easier)
 	private boolean fullTime;
 
 	//TODO blank constructor

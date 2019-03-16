@@ -4,7 +4,6 @@
  * 
  * */
 
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -149,7 +148,7 @@ public class AddRecordDialog extends JDialog implements ActionListener {
 			if (checkInput()) {
 				addRecord();
 				dispose();
-				this.parent.changesMade = true;
+				this.parent.file_change = true;
 			}
 			// else display message and set text fields to white colour
 			else {

@@ -48,7 +48,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import net.miginfocom.swing.MigLayout;
-//TODO replace all strings with values from a String value class
+
 public class EmployeeDetails extends JFrame implements ActionListener, ItemListener, DocumentListener, WindowListener {
 	// decimal format for inactive currency text field
 	private static final DecimalFormat format = new DecimalFormat("\u20ac ###,###,##0.00");
@@ -70,11 +70,11 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	public File getFile() {
 		return file;
 	}
-	//TODO booleans below need name changes
+
 	// holds true or false if any changes are made for text fields
-	private boolean change = false;
+	private boolean textfield_change = false;
 	// holds true or false if any changes are made for file content
-	boolean changesMade = false;
+	boolean file_change = false;
 	private JMenuItem open, save, saveAs, create, modify, delete, firstItem, lastItem, nextItem, prevItem, searchById,
 			searchBySurname, listAll, closeApp;
 	private JButton first, previous, next, last, add, edit, deleteButton, displayAll, searchId, searchSurname,
@@ -191,6 +191,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	private JPanel navigPanel() {
 		JPanel navigPanel = new JPanel();
 
+		//TODO images here also
 		navigPanel.setBorder(BorderFactory.createTitledBorder(DisplayValues.navigate));
 		navigPanel.add(first = new JButton(new ImageIcon(
 				new ImageIcon("first.png").getImage().getScaledInstance(17, 17, java.awt.Image.SCALE_SMOOTH))));
@@ -350,31 +351,20 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			else
 				fullTimeCombo.setSelectedIndex(2);
 		}
-		change = false;
+		textfield_change = false;
 	}
 
 
 	private void displayEmployeeSummaryDialog() {
 
 		if (isSomeoneToDisplay())
-			new EmployeeSummaryDialog(getAllEmloyees());
+			new EmployeeSummaryDialog(getAllEmployees());
 	}
 
 	private void displaySearchByDialog(String type) {
 		if (isSomeoneToDisplay())
 			new SearchByDialog(EmployeeDetails.this, type);
 	}
-
-	/*private void displaySearchByIdDialog() {
-		if (isSomeoneToDisplay())
-			new SearchByIdDialog(EmployeeDetails.this);
-	}
-
-
-	private void displaySearchBySurnameDialog() {
-		if (isSomeoneToDisplay())
-			new SearchBySurnameDialog(EmployeeDetails.this);
-	}*/
 
 	// find byte start in file for first active record
 	private void firstRecord() {
@@ -591,7 +581,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	}
 
 	// create vector of vectors with all Employee details
-	private Vector<Object> getAllEmloyees() {
+	private Vector<Object> getAllEmployees() {
 
 		Vector<Object> allEmployee = new Vector<Object>();
 		Vector<Object> empDetails;
@@ -626,7 +616,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		if (isSomeoneToDisplay()) {
 			// remove euro sign from salary text field
 			salaryField.setText(fieldFormat.format(currentEmployee.getSalary()));
-			change = false;
+			textfield_change = false;
 			setEnabled(true);
 		}
 	}
@@ -677,7 +667,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	private boolean checkForChanges() {
 		boolean anyChanges = false;
 
-		if (change) {
+		if (textfield_change) {
 			saveChanges();
 			anyChanges = true;
 		}
@@ -704,8 +694,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 		return valid;
 	}
-//TODO doing same as above
-	//TODO textfield.background change?
 
 	private void setToWhite() {
 		ppsField.setBackground(UIManager.getColor("TextField.background"));
@@ -747,7 +735,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		fc.setFileFilter(datfilter);
 		File newFile;
 		// if old file is not empty or changes has been made, offer user to save old file
-		if (file.length() != 0 || change) {
+		if (file.length() != 0 || textfield_change) {
 			int returnVal = JOptionPane.showOptionDialog(frame, DisplayValues.save_changes_question, DisplayValues.save,
 					JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 			// if user wants to save file, save it
@@ -779,7 +767,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			saveFileAs();
 		else {
 			// if changes has been made to text field offer user to save these changes
-			if (change) {
+			if (textfield_change) {
 				int returnVal = JOptionPane.showOptionDialog(frame, DisplayValues.save_changes_question, DisplayValues.save,
 						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 				// save changes if user choose this option
@@ -815,7 +803,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 			application.changeRecords(currentEmployee, currentByteStart);
 			application.closeWriteFile();
-			changesMade = false;
+			file_change = false;
 		}
 		displayRecords(currentEmployee);
 		setEnabled(false);
@@ -857,14 +845,14 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			catch (IOException e) {
 			}
 		}
-		changesMade = false;
+		file_change = false;
 	}
 
 	// allow to save changes to file when exiting the application
 	private void exitApp() {
 
 		if (file.length() != 0) {
-			if (changesMade) {
+			if (file_change) {
 				int returnVal = JOptionPane.showOptionDialog(frame, DisplayValues.save_changes_question, DisplayValues.save,
 						JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 				// if user chooses to save file, save file
@@ -933,11 +921,11 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		} else if (e.getSource() == save) {
 			if (checkInput() && !checkForChanges())
 				saveFile();
-			change = false;
+			textfield_change = false;
 		} else if (e.getSource() == saveAs) {
 			if (checkInput() && !checkForChanges())
 				saveFileAs();
-			change = false;
+			textfield_change = false;
 		} else if (e.getSource() == searchById) {
 			if (checkInput() && !checkForChanges()) {
 				type = "ID";
@@ -1039,23 +1027,23 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 	// DocumentListener methods
 	public void changedUpdate(DocumentEvent d) {
-		change = true;
+		textfield_change = true;
 		new JTextFieldLimit(20);
 	}
 
 	public void insertUpdate(DocumentEvent d) {
-		change = true;
+		textfield_change = true;
 		new JTextFieldLimit(20);
 	}
 
 	public void removeUpdate(DocumentEvent d) {
-		change = true;
+		textfield_change = true;
 		new JTextFieldLimit(20);
 	}
 
 	// ItemListener method
 	public void itemStateChanged(ItemEvent e) {
-		change = true;
+		textfield_change = true;
 	}
 
 	// WindowsListener methods
